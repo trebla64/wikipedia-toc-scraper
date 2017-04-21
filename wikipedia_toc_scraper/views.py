@@ -17,6 +17,10 @@ from pyramid.view import view_config
 #    server = make_server('0.0.0.0', 8080, app)
 #    server.serve_forever()
 
+@view_config(route_name='toc', renderer='templates/toc.jinja2')
+def toc_view(request):
+    return {}
+
 @view_config(route_name='home', renderer='templates/mytemplate.jinja2')
 def my_view(request):
     return {'project': 'wikipedia-toc-scraper'}
