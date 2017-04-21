@@ -1,0 +1,3 @@
+[run]
+source = wikipedia_toc_scraper
+omit = wikipedia_toc_scraper/test*
