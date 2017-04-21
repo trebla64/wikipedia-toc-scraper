@@ -1,34 +1,47 @@
 from pyramid.view import view_config
 import urllib3
-
-#>>> import urllib3
-#>>> http = urllib3.PoolManager()
-#>>> r = http.request('GET', 'http://httpbin.org/robots.txt')
-#>>> r.status
-#200
-#>>> r.data
-#'User-agent: *\nDisallow: /deny\n'
+import re
+import rfc3987
 
 
-#def toc_view(request):
-#    return Response('toc of: %s' % request.GET.get('page_url', ''))
-#
-#def main_view(request):
-#    return Response(body='<form action="toc" method="GET">Wikipedia page: <input name="page_url" type="text"/><input type="submit" value="Submit"/></form>')
-#
-#if __name__ == '__main__':
-#    config = Configurator()
-#    config.add_route('root', '/')
-#    config.add_route('toc', '/toc')
-#    config.add_view(main_view, route_name='root')
-#    config.add_view(toc_view, route_name='toc')
-#    app = config.make_wsgi_app()
-#    server = make_server('0.0.0.0', 8080, app)
-#    server.serve_forever()
+def get_domain(page_url):
+    d = rfc3987.parse(page_url, rule='URI')
+    return d['authority']
+
+def test_page(page_url):
+    http = urllib3.PoolManager()
+    r = http.request('GET', page_url)
+    return r.status
 
 @view_config(route_name='toc', renderer='templates/toc.jinja2')
 def toc_view(request):
-    return {'foo': 'bar'}
+    regex = re.compile(
+        r'^(?:http|ftp)s?://' # http:// or https://
+        r'(?:(?:[A-Z0-9](?:[A-Z0-9-]{0,61}[A-Z0-9])?\.)+(?:[A-Z]{2,6}\.?|[A-Z0-9-]{2,}\.?)|' #domain...
+        r'localhost|' #localhost...
+        r'\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})' # ...or ip
+        r'(?::\d+)?' # optional port
+        r'(?:/?|[/?]\S+)$', re.IGNORECASE)
+
+    domain   = 'Invalid'
+    res      = 404
+    is_valid = False
+    page_url = request.GET.get('page_url', '')
+    m = regex.match(page_url)
+    if m:
+        domain = get_domain(page_url)
+        is_valid = True
+    else:
+        page_url = 'https://' + page_url
+        if regex.match(page_url):
+            domain = get_domain(page_url)
+            is_valid = True
+
+    # If the URL was found to be valid, ensure that the domain name contains 'wikipedia.org'
+    if is_valid:
+        return {'protocol': page_url, 'domain': domain, 'res': 200}
+
+    return {'protocol': 'N/A', 'domain': 'N/A', 'res': 404}
 
 @view_config(route_name='home', renderer='templates/mytemplate.jinja2')
 def my_view(request):
