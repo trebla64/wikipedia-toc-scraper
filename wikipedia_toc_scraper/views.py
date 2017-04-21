@@ -39,7 +39,11 @@ def toc_view(request):
 
     # If the URL was found to be valid, ensure that the domain name contains 'wikipedia.org'
     if is_valid:
-        return {'protocol': page_url, 'domain': domain, 'res': 200}
+        domain_regex = re.compile(r'^.*?wikipedia\.org$', re.IGNORECASE)
+        if domain_regex.match(domain):
+            return {'protocol': page_url, 'domain': domain, 'res': 200}
+        else:
+            return {'protocol': 'N/A', 'domain': "Doesn't contain 'wikipedia.org'", 'res': 404}
 
     return {'protocol': 'N/A', 'domain': 'N/A', 'res': 404}
 
