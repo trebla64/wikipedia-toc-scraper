@@ -1,6 +1,7 @@
 arrow==0.10.0
 beautifulsoup4==4.5.3
 binaryornot==0.4.3
+certifi==2017.4.17
 chardet==3.0.2
 click==6.7
 colorama==0.3.7
@@ -35,6 +36,6 @@ waitress==1.0.2
 WebOb==1.7.2
 WebTest==2.0.27
 whichcraft==0.4.0
--e git+git@github.com:trebla64/wikipedia-toc-scraper.git@a0dd111d08b7d2e21897cfd7bd37d759b541a450#egg=wikipedia_toc_scraper
+-e git+git@github.com:trebla64/wikipedia-toc-scraper.git@80bacf43e740ff59889d7484e98a259cb8db5775#egg=wikipedia_toc_scraper
 zope.deprecation==4.2.0
 zope.interface==4.3.3
