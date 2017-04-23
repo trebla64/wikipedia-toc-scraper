@@ -1,4 +1,5 @@
 from pyramid.view import view_config
+import certifi
 import urllib3
 import re
 import rfc3987
@@ -42,7 +43,7 @@ def toc_view(request):
     if is_valid:
         domain_regex = re.compile(r'^.*?wikipedia\.org$', re.IGNORECASE)
         if domain_regex.match(domain):
-            http = urllib3.PoolManager()
+            http = urllib3.PoolManager(cert_reqs='CERT_REQUIRED', ca_certs=certifi.where())
             r = http.request('GET', page_url)
             output = ''
             if r.status == 200:
