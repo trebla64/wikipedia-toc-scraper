@@ -2,6 +2,7 @@ from pyramid.view import view_config
 import urllib3
 import re
 import rfc3987
+from lxml import etree
 
 
 def get_domain(page_url):
@@ -43,7 +44,13 @@ def toc_view(request):
         if domain_regex.match(domain):
             http = urllib3.PoolManager()
             r = http.request('GET', page_url)
-            return {'protocol': r.data.decode('utf-8'), 'domain': domain, 'res': r.status}
+            output = ''
+            if r.status == 200:
+                root = etree.fromstring(r.data.decode('utf-8'))
+                toc = root.find('.//div[@id="toc"]')
+                output = etree.tostring(toc)
+
+            return {'protocol': output, 'domain': domain, 'res': r.status}
         else:
             return {'protocol': 'N/A', 'domain': "Doesn't contain 'wikipedia.org'", 'res': 404}
 
