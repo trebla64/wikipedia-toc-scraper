@@ -10,11 +10,6 @@ def get_domain(page_url):
     d = rfc3987.parse(page_url, rule='URI')
     return d['authority']
 
-def test_page(page_url):
-    http = urllib3.PoolManager()
-    r = http.request('GET', page_url)
-    return r.status
-
 @view_config(route_name='toc', renderer='templates/toc.jinja2')
 def toc_view(request):
     regex = re.compile(
