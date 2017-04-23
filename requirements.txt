@@ -25,7 +25,6 @@ pyramid-mako==1.0.2
 pytest==3.0.7
 pytest-cov==2.4.0
 python-dateutil==2.6.0
-regex==2017.4.5
 repoze.lru==0.6
 rfc3987==1.3.7
 six==1.10.0
@@ -36,6 +35,6 @@ waitress==1.0.2
 WebOb==1.7.2
 WebTest==2.0.27
 whichcraft==0.4.0
--e git+git@github.com:trebla64/wikipedia-toc-scraper.git@80bacf43e740ff59889d7484e98a259cb8db5775#egg=wikipedia_toc_scraper
+-e git+git@github.com:trebla64/wikipedia-toc-scraper.git@759f013bc79bfda7d03deb892c65f66568ed5216#egg=wikipedia_toc_scraper
 zope.deprecation==4.2.0
 zope.interface==4.3.3
