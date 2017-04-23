@@ -50,7 +50,7 @@ def toc_view(request):
                 toc = root.find('.//div[@id="toc"]')
                 output = etree.tostring(toc)
 
-            return {'protocol': 'See code', 'domain': domain, 'res': r.status, 'code': output}
+            return {'protocol': 'See code', 'domain': domain, 'res': r.status, 'code': output.decode('utf-8')}
         else:
             return {'protocol': 'N/A', 'domain': "Doesn't contain 'wikipedia.org'", 'res': 404}
 
