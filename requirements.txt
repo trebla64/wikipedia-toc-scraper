@@ -35,6 +35,6 @@ waitress==1.0.2
 WebOb==1.7.2
 WebTest==2.0.27
 whichcraft==0.4.0
--e git+git@github.com:trebla64/wikipedia-toc-scraper.git@759f013bc79bfda7d03deb892c65f66568ed5216#egg=wikipedia_toc_scraper
+-e git+git@github.com:trebla64/wikipedia-toc-scraper.git@ab09205f53d688db7e3b5343220804b0587eccfa#egg=wikipedia_toc_scraper
 zope.deprecation==4.2.0
 zope.interface==4.3.3
