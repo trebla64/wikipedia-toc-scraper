@@ -11,7 +11,7 @@ future==0.16.0
 hupper==0.4.4
 Jinja2==2.9.6
 jinja2-time==0.2.0
-lxml==3.7.3
+lxml==4.6.2
 Mako==1.0.6
 MarkupSafe==1.0
 PasteDeploy==1.5.2
