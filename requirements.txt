@@ -9,7 +9,7 @@ cookiecutter==1.5.1
 coverage==4.3.4
 future==0.16.0
 hupper==0.4.4
-Jinja2==2.9.6
+Jinja2==2.11.3
 jinja2-time==0.2.0
 lxml==3.7.3
 Mako==1.0.6
