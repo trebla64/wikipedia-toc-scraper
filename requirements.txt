@@ -17,7 +17,7 @@ MarkupSafe==1.0
 PasteDeploy==1.5.2
 poyo==0.4.1
 py==1.4.33
-Pygments==2.2.0
+Pygments==2.7.4
 pyramid==1.8.3
 pyramid-debugtoolbar==3.0.5
 pyramid-jinja2==2.7
